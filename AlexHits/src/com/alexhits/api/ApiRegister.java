@@ -6,10 +6,13 @@ import org.json.JSONObject;
 import com.alexhits.core.AlexHitsActivity;
 import com.alexhits.model.User;
 
-public class ApiRegister extends ApiHelper{
+public class ApiRegister extends ApiAbstract{
 
-	public ApiRegister(AlexHitsActivity activity, String URL) {
-		super(activity, URL);
+	
+	public ApiRegister(AlexHitsActivity activity) {
+		super(activity);
+		URL = "";
+		dialogText = "";
 		
 	}
 
@@ -31,7 +34,7 @@ public class ApiRegister extends ApiHelper{
 		String fullname = json.optString("fullname");
 		String email = json.optString("email");
 		activity.cache.currentUser = new User(user_id, fullname, email);
-		
+		activity.showToast(user_id+"");
 	}
 	
 	

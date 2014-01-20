@@ -20,5 +20,11 @@ public class Constants {
 	public static String INFO_ZMAN="http://cdn.voscast.com/stats/display.js?key=6242d92c105d86cbecca48e501816315&stats=songtitle";
 	public static String INFO_UNDERGROUND="http://cdn.voscast.com/stats/display.js?key=6ff74af9fe70206fce8d9bbe361c6ad9&stats=songtitle";
 	public static String INFO_TOP="http://cdn.voscast.com/stats/display.js?key=822a0ac777a0e5d3db5b555da3d0203e&stats=songtitle";
+
+	
+	// ===== API URLs ======
+	public static String API_REGISTER = "http://dry-journey-4253.herokuapp.com/api_register";
+	
 	
 }
+

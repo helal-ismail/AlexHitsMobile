@@ -20,6 +20,7 @@
             android:src="@drawable/logo" />
 
         <EditText
+            android:id="@+id/name_field"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
@@ -31,6 +32,7 @@
             android:paddingTop="5dp" />
 
         <EditText
+            android:id="@+id/email_field"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
@@ -42,6 +44,7 @@
             android:paddingTop="5dp" />
 
         <EditText
+            android:id="@+id/pass_field"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
@@ -50,9 +53,11 @@
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:paddingTop="5dp" />
+            android:paddingTop="5dp"
+            android:password="true" />
 
         <EditText
+            android:id="@+id/pass_confirm"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_text"
@@ -60,9 +65,11 @@
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:paddingTop="5dp" />
+            android:paddingTop="5dp"
+            android:password="true" />
 
         <Button
+            android:id="@+id/sign_up_btn"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"

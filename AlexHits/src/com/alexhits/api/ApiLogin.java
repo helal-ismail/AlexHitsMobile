@@ -4,10 +4,12 @@ import org.json.JSONObject;
 
 import com.alexhits.core.AlexHitsActivity;
 
-public class ApiLogin extends ApiHelper{
+public class ApiLogin extends ApiAbstract{
 
 	public ApiLogin(AlexHitsActivity activity) {
-		super(activity, "");
+		super(activity);
+		URL = "";
+		dialogText="";
 	}
 
 	

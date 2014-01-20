@@ -13,20 +13,38 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
-import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 
 import com.alexhits.core.AlexHitsActivity;
+import com.alexhits.ui.R;
 
-public abstract class ApiHelper extends AsyncTask<Void, Void, String>{
+public abstract class ApiAbstract extends AsyncTask<Void, Void, String>{
 	AlexHitsActivity activity;
 	String URL;
+	String dialogText;
 	List<NameValuePair> paramsList = new ArrayList<NameValuePair>();
+	ProgressDialog dialog = null;
 	
 	
-	public ApiHelper(AlexHitsActivity activity, String URL) {
+	public ApiAbstract(AlexHitsActivity activity) {
 		this.activity = activity;
-		this.URL = URL;
+	
+	}
+	
+	@Override
+	protected void onPreExecute() {
+		super.onPreExecute();
+		
+		dialog = new ProgressDialog(activity);
+		dialog.setTitle("AlexHits");
+		dialog.setIcon(R.drawable.logo);
+		dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		dialog.setCancelable(false);
+		dialog.setMessage(dialogText);
+		dialog.show();
+
+		
 	}
 	
 	@Override
