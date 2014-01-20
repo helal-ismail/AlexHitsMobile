@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/empty_bg" >
+
+    <ImageView
+        android:layout_above="@+id/login_list"
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:src="@drawable/logo" />
+
+    <LinearLayout
+        android:id="@+id/login_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
+
+        <ImageButton
+            android:id="@+id/login_fb"
+            android:layout_width="fill_parent"
+            android:layout_height="75dp"
+            android:background="@drawable/login_fb" />
+
+        <ImageButton
+            android:id="@+id/login_tw"
+            android:layout_width="fill_parent"
+            android:layout_height="75dp"
+            android:background="@drawable/login_tw" />
+
+        <ImageButton
+            android:id="@+id/login_google"
+            android:layout_width="fill_parent"
+            android:layout_height="75dp"
+            android:background="@drawable/login_google" />
+
+        <ImageButton
+            android:id="@+id/login_alexhits"
+            android:layout_width="fill_parent"
+            android:layout_height="75dp"
+            android:background="@drawable/login_alexhits" />
+        <ImageButton
+            android:id="@+id/login_skip"
+            android:layout_width="fill_parent"
+            android:layout_height="75dp"
+            android:background="@drawable/login_skip" />
+    </LinearLayout>
+
+</RelativeLayout>

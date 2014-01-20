@@ -1,0 +1,16 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SplashActivity"
+    android:background="@drawable/empty_bg" >
+
+   <ImageView 
+       android:scaleX=".5"
+       android:scaleY=".5"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:src="@drawable/logo"
+       />
+
+</RelativeLayout>
