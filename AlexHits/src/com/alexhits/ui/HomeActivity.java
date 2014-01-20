@@ -13,9 +13,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alexhits.api.SongInfoHelper;
 import com.alexhits.core.AlexHitsActivity;
 import com.alexhits.core.Constants;
-import com.alexhits.network.SongInfoHelper;
 
 public class HomeActivity extends AlexHitsActivity {
 

@@ -1,4 +1,4 @@
-package com.alexhits.network;
+package com.alexhits.api;
 
 import java.io.InputStream;
 
