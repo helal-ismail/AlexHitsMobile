@@ -4,6 +4,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
 import com.alexhits.core.AlexHitsActivity;
+import com.alexhits.core.Constants;
 import com.alexhits.model.User;
 
 public class ApiRegister extends ApiAbstract{
@@ -11,8 +12,8 @@ public class ApiRegister extends ApiAbstract{
 	
 	public ApiRegister(AlexHitsActivity activity) {
 		super(activity);
-		URL = "";
-		dialogText = "";
+		URL = Constants.API_REGISTER;
+		dialogText="Registering user info";
 		
 	}
 
@@ -33,8 +34,7 @@ public class ApiRegister extends ApiAbstract{
 		int user_id = json.optInt("user_id");
 		String fullname = json.optString("fullname");
 		String email = json.optString("email");
-		activity.cache.currentUser = new User(user_id, fullname, email);
-		activity.showToast(user_id+"");
+		activity.initUser(user_id, fullname, email);
 	}
 	
 	

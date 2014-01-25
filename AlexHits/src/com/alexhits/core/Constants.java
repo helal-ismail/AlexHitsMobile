@@ -2,6 +2,11 @@ package com.alexhits.core;
 
 public class Constants {
 	
+	// ===== MISC ===========
+	public static String DIR_USERS = ".alexhits/users";
+	public static String TAG = "helal";
+	
+	
 	// ===== Radio Stream URLs =====
 	public static String RADIO_MAIN = "http://s9.voscast.com:8396/";
 	public static String RADIO_CLASSIC = "http://s2.voscast.com:8702/";
@@ -24,6 +29,7 @@ public class Constants {
 	
 	// ===== API URLs ======
 	public static String API_REGISTER = "http://dry-journey-4253.herokuapp.com/api_register";
+	public static String API_LOGIN = "http://dry-journey-4253.herokuapp.com/api_login";
 	
 	
 }

@@ -15,8 +15,10 @@ import org.json.JSONObject;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.alexhits.core.AlexHitsActivity;
+import com.alexhits.core.Constants;
 import com.alexhits.ui.R;
 
 public abstract class ApiAbstract extends AsyncTask<Void, Void, String>{
@@ -85,15 +87,21 @@ public abstract class ApiAbstract extends AsyncTask<Void, Void, String>{
 				JSONObject json = new JSONObject(result);
 				boolean success = json.optBoolean("success");
 				if(success)
+				{
+					dialog.dismiss();
 					customOnPostExecute(json);
+				}
 				else
 				{
 					String msg = json.optString("msg");
+					dialog.dismiss();
 					activity.showToast(msg);
 				}
 			}
 			catch(Exception e)
 			{
+				Log.d(Constants.TAG, e.getMessage());
+				dialog.dismiss();
 				activity.showToast("Request Failed");
 			}
 		}

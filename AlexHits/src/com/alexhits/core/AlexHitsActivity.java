@@ -1,11 +1,14 @@
 package com.alexhits.core;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import com.alexhits.api.ApiRegister;
+import com.alexhits.model.User;
+import com.alexhits.ui.HomeActivity;
 
 import android.app.Activity;
 import android.app.PendingIntent.OnFinished;
@@ -13,6 +16,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
@@ -60,6 +64,27 @@ public abstract class AlexHitsActivity extends Activity implements
 		return sb.toString();
 	}
 
+	public void initUser(int user_id,String fullname,String email)
+	{
+		cache.currentUser = new User(user_id, fullname, email);
+		File sd = Environment.getExternalStorageDirectory();
+		File dir = new File(sd, Constants.DIR_USERS);
+		dir.mkdirs();
+		File user_dir = new File(dir, "user_"+user_id);
+		user_dir.mkdir();
+		
+		File downloads_dir = new File(user_dir, "downloads");
+		downloads_dir.mkdir();
+		
+		File quicklist_dir = new File(user_dir, "quicklist");
+		quicklist_dir.mkdir();
+		
+		
+		Intent homeIntent = new Intent(mContext, HomeActivity.class);
+		startActivity(homeIntent);
+		finish();
+	}
+	
 	// ========= API Functions ========
 	// Register API
 	public void api_register(String email, String password, String name) {

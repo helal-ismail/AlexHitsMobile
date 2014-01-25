@@ -90,18 +90,20 @@
             android:src="@drawable/pause_icon" >
         </ImageView>
 
-        <LinearLayout
+        <RelativeLayout
+            android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal" >
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_margin="15dp" >
 
             <TextView
+                android:layout_centerVertical="true"
                 android:id="@+id/song_info"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
+				android:layout_toLeftOf="@+id/download_btn"
+                
                 android:ellipsize="marquee"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
@@ -111,7 +113,16 @@
                 android:singleLine="true"
                 android:textColor="@color/yellow"
                 android:textSize="18sp" />
-        </LinearLayout>
+            
+				<ImageView 
+				    android:layout_centerVertical="true"
+				    android:layout_alignParentRight="true"
+				    android:id="@+id/download_btn"
+				    android:layout_width="40dp"
+				    android:layout_height="40dp"
+				    android:src="@drawable/download_icon"
+				    />            
+        </RelativeLayout>
     </FrameLayout>
 
     <LinearLayout

@@ -1,5 +1,9 @@
 package com.alexhits.core;
 
+import java.io.File;
+
+import android.os.Environment;
+
 import com.alexhits.model.User;
 
 public class CacheHelper {
