@@ -1,6 +1,7 @@
 package com.alexhits.api;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -40,23 +41,28 @@ public class APiDownload extends ApiAbstract{
 		String song_artist = json.optString("song_artist");
 		String download_url = json.optString("download_url");
 		Song song = new Song(song_id, song_title, song_artist, download_url);
-		
+		download(song);
 	}
 	
 	private void download(Song song)
 	{
-		
+		new DownloadFileFromURL().execute(song);
 	}
 	
 	
+	//http://www.androidhive.info/2012/04/android-downloading-file-by-showing-progress-bar/
 	
-	private class DownloadFileFromURL extends AsyncTask<String, String, String> {
+	
+	private class DownloadFileFromURL extends AsyncTask<Song, String, String> {
 		 
 	    @Override
-	    protected String doInBackground(String... f_url) {
+	    protected String doInBackground(Song... songs) {
 	        int count;
 	        try {
-	            URL url = new URL(f_url[0]);
+	        	Song song = songs[0];
+	        	String download_url = song.download_url;
+	        	
+	            URL url = new URL(download_url);
 	            URLConnection conection = url.openConnection();
 	            conection.connect();
 	            
@@ -66,8 +72,11 @@ public class APiDownload extends ApiAbstract{
 	            InputStream input = new BufferedInputStream(url.openStream(), 8192);
 	 
 	            File user_dir = activity.initUserDir(activity.cache.currentUser.user_id);
+	            File downloads_dir = new File(user_dir, "downloads");
+	            downloads_dir.mkdirs();
+	            File songFile = new File(downloads_dir, song.song_title+".mp3");
 	            
-	            OutputStream output = new FileOutputStream("/sdcard/downloadedfile.jpg");
+	            OutputStream output = new FileOutputStream(songFile.getPath());
 	 
 	            byte data[] = new byte[1024];
 	 
@@ -99,15 +108,8 @@ public class APiDownload extends ApiAbstract{
 	 
 	   
 	    @Override
-	    protected void onPostExecute(String file_url) {
-	        // dismiss the dialog after the file was downloaded
-	        dismissDialog(progress_bar_type);
-	 
-	        // Displaying downloaded image into image view
-	        // Reading image path from sdcard
-	        String imagePath = Environment.getExternalStorageDirectory().toString() + "/downloadedfile.jpg";
-	        // setting downloaded into image view
-	        my_image.setImageDrawable(Drawable.createFromPath(imagePath));
+	    protected void onPostExecute(String songTitle) {
+	        activity.showToast(songTitle+" was downloaded succesfully"); 
 	    }
 	 
 	}
