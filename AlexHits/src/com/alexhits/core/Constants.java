@@ -30,6 +30,7 @@ public class Constants {
 	// ===== API URLs ======
 	public static String API_REGISTER = "http://dry-journey-4253.herokuapp.com/api_register";
 	public static String API_LOGIN = "http://dry-journey-4253.herokuapp.com/api_login";
+	public static String API_DOWNLOAD = "http://dry-journey-4253.herokuapp.com/api_download";
 	
 	
 }

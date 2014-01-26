@@ -64,9 +64,8 @@ public abstract class AlexHitsActivity extends Activity implements
 		return sb.toString();
 	}
 
-	public void initUser(int user_id,String fullname,String email)
+	public File initUserDir(int user_id)
 	{
-		cache.currentUser = new User(user_id, fullname, email);
 		File sd = Environment.getExternalStorageDirectory();
 		File dir = new File(sd, Constants.DIR_USERS);
 		dir.mkdirs();
@@ -79,7 +78,13 @@ public abstract class AlexHitsActivity extends Activity implements
 		File quicklist_dir = new File(user_dir, "quicklist");
 		quicklist_dir.mkdir();
 		
-		
+		return user_dir;
+	}
+	
+	public void initUser(int user_id,String fullname,String email)
+	{
+		cache.currentUser = new User(user_id, fullname, email);
+		initUserDir(user_id);
 		Intent homeIntent = new Intent(mContext, HomeActivity.class);
 		startActivity(homeIntent);
 		finish();
