@@ -3,9 +3,8 @@ package com.alexhits.api;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
-import com.alexhits.core.AlexHitsActivity;
 import com.alexhits.core.Constants;
-import com.alexhits.model.User;
+import com.alexhits.ui.AlexHitsActivity;
 
 public class ApiLogin extends ApiAbstract{
 
@@ -15,7 +14,7 @@ public class ApiLogin extends ApiAbstract{
 		dialogText="Signing In ...";
 	}
 
-	public void setParams(String email, String password, String name){
+	public void setParams(String email, String password){
 		paramsList.add(new BasicNameValuePair("email", email));
 		paramsList.add(new BasicNameValuePair("password", password));
 

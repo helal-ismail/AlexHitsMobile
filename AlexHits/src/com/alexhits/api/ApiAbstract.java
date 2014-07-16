@@ -17,51 +17,53 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.alexhits.core.AlexHitsActivity;
 import com.alexhits.core.Constants;
+import com.alexhits.ui.AlexHitsActivity;
 import com.alexhits.ui.R;
 
-public abstract class ApiAbstract extends AsyncTask<Void, Void, String>{
+public abstract class ApiAbstract extends AsyncTask<Void, Void, String> {
 	AlexHitsActivity activity;
 	String URL;
 	String dialogText;
 	List<NameValuePair> paramsList = new ArrayList<NameValuePair>();
 	ProgressDialog dialog = null;
-	
-	
+	boolean showDialog = true;
+
 	public ApiAbstract(AlexHitsActivity activity) {
 		this.activity = activity;
-	
+
 	}
-	
+
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
-		
-		dialog = new ProgressDialog(activity);
-		dialog.setTitle("AlexHits");
-		dialog.setIcon(R.drawable.logo);
-		dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-		dialog.setCancelable(false);
-		dialog.setMessage(dialogText);
-		dialog.show();
-
-		
+		if (showDialog) {
+			dialog = new ProgressDialog(activity);
+			dialog.setTitle("AlexHits");
+			dialog.setIcon(R.drawable.thumb);
+			dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			dialog.setCancelable(false);
+			dialog.setMessage(dialogText);
+			dialog.show();
+		} else
+		{
+			activity.showToast(dialogText);
+			dialog = null;
+		}
 	}
-	
+
 	@Override
 	protected String doInBackground(Void... params) {
 		String result = "";
-		try
-		{
-			
+		try {
+
 			HttpClient httpclient = new DefaultHttpClient();
 			HttpPost httpPost = new HttpPost(URL);
 			httpPost.setEntity(new UrlEncodedFormEntity(paramsList));
 
 			HttpResponse response;
 			response = httpclient.execute(httpPost);
-			
+
 			HttpEntity entity = response.getEntity();
 			if (entity != null) {
 				InputStream instream = entity.getContent();
@@ -69,43 +71,36 @@ public abstract class ApiAbstract extends AsyncTask<Void, Void, String>{
 			}
 			return result;
 
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			return result;
 		}
 	}
-	
-	
 
 	@Override
 	protected void onPostExecute(String result) {
 		super.onPostExecute(result);
-				
-			try
-			{
-				JSONObject json = new JSONObject(result);
-				boolean success = json.optBoolean("success");
-				if(success)
-				{
+
+		try {
+			JSONObject json = new JSONObject(result);
+			boolean success = json.optBoolean("success");
+			if (success) {
+				if(dialog !=null)
 					dialog.dismiss();
-					customOnPostExecute(json);
-				}
-				else
-				{
-					String msg = json.optString("msg");
+				customOnPostExecute(json);
+			} else {
+				String msg = json.optString("msg");
+				if(dialog!=null)
 					dialog.dismiss();
-					activity.showToast(msg);
-				}
+				activity.showToast(msg);
 			}
-			catch(Exception e)
-			{
-				Log.d(Constants.TAG, e.getMessage());
+		} catch (Exception e) {
+			Log.d(Constants.TAG, e.getMessage());
+			if(dialog !=null)
 				dialog.dismiss();
-				activity.showToast("Request Failed");
-			}
+			activity.showToast("Request Failed");
 		}
-	
+	}
+
 	public abstract void customOnPostExecute(JSONObject json);
-	
+
 }

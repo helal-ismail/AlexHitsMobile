@@ -11,7 +11,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import android.os.AsyncTask;
 import android.widget.TextView;
 
-import com.alexhits.core.AlexHitsActivity;
+import com.alexhits.ui.AlexHitsActivity;
 import com.alexhits.ui.R;
 
 public class SongInfoHelper extends AsyncTask<Void, String, String>{

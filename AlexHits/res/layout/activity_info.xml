@@ -1,0 +1,87 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/home_bg" >
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="65dp"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal" >
+
+        
+
+        <TextView
+            android:id="@+id/status_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Information"
+            android:textColor="#B8B771"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_below="@+id/header"
+        android:layout_above="@+id/footer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="AlexHits is an online radio and a music service application, our goal is to make your listening and hunting for good music much easier, you can listen to a different kind of music from the middle east and all around the world. choose your favorite Radio from our different streams that offers you different kinds of music genres.\n\nYou can download and play the songs you love offline. Moreover listen to your favorite songs in an atmosphere that you like; under the rain or at the beach with the waves sound or in a rain forest with the birds... etc\n\nYou will always find new features and services that will change your idea about online radios and make your music listening experience much easier."
+            android:textColor="#B8B771"
+            android:textSize="18sp" />
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/footer" 
+        android:layout_width="fill_parent"
+        android:layout_height="65dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="15dp" >
+
+        <ImageView
+            android:id="@+id/radio_btn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/radio_icon" />
+
+        <ImageView
+            android:id="@+id/downloads_btn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/download_icon" />
+
+        <ImageView
+            android:id="@+id/quicklist_btn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/quicklist_icon" />
+
+        <ImageView
+            android:id="@+id/info_btn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:src="@drawable/info_selected" />
+    </LinearLayout>
+
+</RelativeLayout>

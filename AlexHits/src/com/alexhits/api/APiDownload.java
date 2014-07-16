@@ -11,27 +11,33 @@ import java.net.URLConnection;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
-import android.graphics.drawable.Drawable;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Environment;
-import android.util.Log;
+import android.support.v4.app.NotificationCompat;
 
-import com.alexhits.core.AlexHitsActivity;
 import com.alexhits.core.Constants;
 import com.alexhits.model.Song;
+import com.alexhits.model.User;
+import com.alexhits.ui.AlexHitsActivity;
+import com.alexhits.ui.R;
+import com.bugsense.trace.BugSenseHandler;
 
-public class APiDownload extends ApiAbstract{
+public class ApiDownload extends ApiAbstract{
 	
+
 	
-	
-	public APiDownload(AlexHitsActivity activity) {
+	public ApiDownload(AlexHitsActivity activity) {
 		super(activity);
+		showDialog = false;
 		URL = Constants.API_DOWNLOAD;
 		dialogText = "Download started ...";
 	}
 
-	public void setParams(String songInfo){
+	public void setParams(String songInfo, int user_id){
 		paramsList.add(new BasicNameValuePair("song_info", songInfo));
+		paramsList.add(new BasicNameValuePair("user_id", user_id+""));
+		
 	}
 	
 	@Override
@@ -41,6 +47,7 @@ public class APiDownload extends ApiAbstract{
 		String song_artist = json.optString("song_artist");
 		String download_url = json.optString("download_url");
 		Song song = new Song(song_id, song_title, song_artist, download_url);
+		
 		download(song);
 	}
 	
@@ -54,7 +61,22 @@ public class APiDownload extends ApiAbstract{
 	
 	
 	private class DownloadFileFromURL extends AsyncTask<Song, String, String> {
-		 
+		
+		NotificationManager mNotifyManager;
+		NotificationCompat.Builder mBuilder;
+		
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			mNotifyManager =
+			        (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
+			mBuilder = new NotificationCompat.Builder(activity);
+			mBuilder.setContentTitle("Alexhits Download Service")
+			    .setContentText("downloading song ...")
+			    .setSmallIcon(R.drawable.thumb);
+		}
+		
 	    @Override
 	    protected String doInBackground(Song... songs) {
 	        int count;
@@ -71,6 +93,10 @@ public class APiDownload extends ApiAbstract{
 	           
 	            InputStream input = new BufferedInputStream(url.openStream(), 8192);
 	 
+	            
+	            AlexHitsActivity act = activity;
+	            User user = act.cache.currentUser;
+	            int userId = activity.cache.currentUser.user_id;
 	            File user_dir = activity.initUserDir(activity.cache.currentUser.user_id);
 	            File downloads_dir = new File(user_dir, "downloads");
 	            downloads_dir.mkdirs();
@@ -86,7 +112,7 @@ public class APiDownload extends ApiAbstract{
 	                total += count;
 	                // publishing the progress....
 	                // After this onProgressUpdate will be called
-	                publishProgress(""+(int)((total*100)/lenghtOfFile));
+	               publishProgress(""+(int)((total*100)/lenghtOfFile));
 	 
 	                // writing data to file
 	                output.write(data, 0, count);
@@ -100,16 +126,30 @@ public class APiDownload extends ApiAbstract{
 	            input.close();
 	 
 	        } catch (Exception e) {
-	            Log.e("Error: ", e.getMessage());
+	        	BugSenseHandler.sendException(e);
+	      //      Log.e("Error: ", e.getMessage());
 	        }
 	 
 	        return null;
 	    }
 	 
+	    @Override
+	    protected void onProgressUpdate(String... values) {
+	    	super.onProgressUpdate(values);
+	    	String val = values[0];
+	    	int value = Integer.parseInt(val);
+	    	 mBuilder.setProgress(100, value, false);
+             mNotifyManager.notify(0, mBuilder.build());
+	    }
+	    
+
 	   
 	    @Override
 	    protected void onPostExecute(String songTitle) {
-	        activity.showToast(songTitle+" was downloaded succesfully"); 
+
+	        mBuilder.setContentText("Download complete").setProgress(0,0,false);
+            mNotifyManager.notify(0, mBuilder.build());
+            
 	    }
 	 
 	}

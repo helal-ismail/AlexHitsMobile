@@ -4,7 +4,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.alexhits.core.AlexHitsActivity;
 import com.alexhits.core.Constants;
 
 public class SubRadioActivity extends AlexHitsActivity {
@@ -50,6 +49,9 @@ public class SubRadioActivity extends AlexHitsActivity {
 
 	@Override
 	public void onClick(View v) {
+		String prevStreamURL = cache.currentStreamURL;
+		
+		cache.isChanged = true;
 		switch (v.getId()) {
 		case R.id.stream_main:
 			cache.currentStreamURL = Constants.RADIO_MAIN;
@@ -90,6 +92,9 @@ public class SubRadioActivity extends AlexHitsActivity {
 		default:
 			break;
 		}
+		
+		if(prevStreamURL.equalsIgnoreCase(cache.currentStreamURL))
+			cache.isChanged = false;
 	}
 
 	private void checkCurrentSubRadio() {
@@ -124,5 +129,10 @@ public class SubRadioActivity extends AlexHitsActivity {
 		LinearLayout l = (LinearLayout) subRadioList.getChildAt(childIndex);
 		ImageView musicIcon = (ImageView) l.getChildAt(2);
 		musicIcon.setVisibility(View.VISIBLE);
+	}
+	
+	@Override
+	public void onBackPressed() {
+		finish();
 	}
 }

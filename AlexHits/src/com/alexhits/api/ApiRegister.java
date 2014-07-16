@@ -3,9 +3,8 @@ package com.alexhits.api;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
-import com.alexhits.core.AlexHitsActivity;
 import com.alexhits.core.Constants;
-import com.alexhits.model.User;
+import com.alexhits.ui.AlexHitsActivity;
 
 public class ApiRegister extends ApiAbstract{
 

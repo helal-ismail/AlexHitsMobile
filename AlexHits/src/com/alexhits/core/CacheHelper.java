@@ -1,12 +1,10 @@
 package com.alexhits.core;
 
-import java.io.File;
-
-import android.os.Environment;
+import android.media.MediaPlayer;
 
 import com.alexhits.model.User;
 
-public class CacheHelper {
+public class CacheHelper{
 	
 	private static CacheHelper instance = new CacheHelper();
 	public static  CacheHelper getInstance(){
@@ -18,7 +16,8 @@ public class CacheHelper {
 	public int currentEffect = 0; // 0 none - 1 rain - 2 jungle - 3 beach
 	
 	public User currentUser = null;
-	
+	public boolean isChanged = false;
+	public MediaPlayer homePlayer, homeEnvPlayer, listPlayer;
 	
 	
 	

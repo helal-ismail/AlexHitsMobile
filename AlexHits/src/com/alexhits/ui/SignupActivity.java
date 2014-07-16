@@ -4,7 +4,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.alexhits.core.AlexHitsActivity;
 
 public class SignupActivity extends AlexHitsActivity{
 
@@ -45,6 +44,10 @@ public class SignupActivity extends AlexHitsActivity{
 		default:
 			break;
 		}
-		
+	}
+	
+	@Override
+	public void onBackPressed() {
+		openIntentBackward(LoginActivity.class);
 	}
 }

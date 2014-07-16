@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Handler;
 import android.view.View;
 
-import com.alexhits.core.AlexHitsActivity;
 
 public class SplashActivity extends AlexHitsActivity {
 
@@ -15,8 +14,9 @@ public class SplashActivity extends AlexHitsActivity {
 		Runnable splashRunnable = new Runnable() {
 			@Override
 			public void run() {
-				Intent loginIntent = new Intent(mContext, LoginActivity.class);
+				Intent loginIntent = new Intent(mContext, HomeActivity.class);
 				startActivity(loginIntent);
+				overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
 				finish();
 			}
 		};

@@ -3,7 +3,7 @@ package com.alexhits.core;
 public class Constants {
 	
 	// ===== MISC ===========
-	public static String DIR_USERS = ".alexhits/users";
+	public static String DIR_USERS = "alexhits/users";
 	public static String TAG = "helal";
 	
 	
@@ -30,8 +30,11 @@ public class Constants {
 	// ===== API URLs ======
 	public static String API_REGISTER = "http://dry-journey-4253.herokuapp.com/api_register";
 	public static String API_LOGIN = "http://dry-journey-4253.herokuapp.com/api_login";
+	public static String API_SOCIAL_LOGIN = "http://dry-journey-4253.herokuapp.com/api_slogin";
 	public static String API_DOWNLOAD = "http://dry-journey-4253.herokuapp.com/api_download";
 	
+	// ====== SOCIAL ====
+	public static String FB_APP_ID = "250143398484526";
 	
 }
 
